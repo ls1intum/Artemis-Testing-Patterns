@@ -156,6 +156,8 @@ void calculateAvgEnvironmentWithZeroComponentsTest(){
 
 A more complete example can be found in the `example_01` directory, where an entire exam exercise is implemented using a **Constants** file.
 
+To test a different variant of the exercise, now only the `variant` variables must be changed to the appropriate version.
+
 ## Implementation Considerations
 * Begin with a concrete testing repository and gradually extract schema-specific elements into a **Constants** file. Attempting to design a fully generic structure from the outset can be challenging and counterproductive.
 * This design allows variables to reference different class types dynamically as well.
