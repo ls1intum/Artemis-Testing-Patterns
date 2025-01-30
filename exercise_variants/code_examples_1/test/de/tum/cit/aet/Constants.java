@@ -7,7 +7,8 @@ public class Constants {
         return switch (version) {
             case 1 -> "off";
             case 2 -> "top";
-            default -> "neutral";
+            case 3 -> "neutral";
+            default -> "";
         };
     }
 
@@ -15,7 +16,8 @@ public class Constants {
         return switch (version) {
             case 1 -> "de.tum.cit.aet.Zoo";
             case 2 -> "de.tum.cit.aet.IceHockeyLeague";
-            default -> "de.tum.cit.aet.TropicalParadise";
+            case 3 -> "de.tum.cit.aet.TropicalParadise";
+            default -> "";
         };
     }
 
@@ -23,7 +25,8 @@ public class Constants {
         return switch (version) {
             case 1 -> "de.tum.cit.aet.House";
             case 2 -> "de.tum.cit.aet.IceHockeyTeam";
-            default -> "de.tum.cit.aet.TropicalZone";
+            case 3 -> "de.tum.cit.aet.TropicalZone";
+            default -> "";
         };
     }
 
@@ -31,7 +34,8 @@ public class Constants {
         return switch (version) {
             case 1 -> "de.tum.cit.aet.Sensor";
             case 2 -> "de.tum.cit.aet.Puck";
-            default -> "de.tum.cit.aet.Pool";
+            case 3 -> "de.tum.cit.aet.Pool";
+            default -> ""
         };
     }
 
@@ -39,7 +43,8 @@ public class Constants {
         return switch (version) {
             case 1 -> "changeHeatingLevel";
             case 2 -> "changeLeaguePosition";
-            default -> "changeClimateControlMode";
+            case 3 -> "changeClimateControlMode";
+            default -> "";
         };
     }
 
@@ -47,7 +52,8 @@ public class Constants {
         return switch (version) {
             case 1 -> "calculateAvgHouseTemperature";
             case 2 -> "computeAvgPuckGoalDifferential";
-            default -> "computeAvgPoolWaterQuality";
+            case 3 -> "computeAvgPoolWaterQuality";
+            default -> "";
         };
     }
 
@@ -55,7 +61,8 @@ public class Constants {
         return switch (version) {
             case 1 -> "calculateMaxAvgHouseTemperature";
             case 2 -> "calculateMaxAvgTeamGoalDifferential";
-            default -> "calculateMaxAvgPoolWaterQuality";
+            case 3 -> "calculateMaxAvgPoolWaterQuality";
+            default -> "";
         };
     }
 
@@ -64,17 +71,20 @@ public class Constants {
             case 1 -> switch (level) {
                 case 1 -> "low";
                 case 2 -> "high";
-                default -> "off";
+                case 3 -> "off";
+                default -> "";
             };
             case 2 -> switch (level){
                 case 1 -> "top";
                 case 2 -> "middle";
-                default -> "bottom";
+                case 3 -> "bottom";
+                default -> "";
             };
             default -> switch (level){
                 case 1 -> "humid";
                 case 2 -> "dry";
-                default -> "neutral";
+                case 3 -> "neutral";
+                default -> "";
             }; // Return an empty string for any other version
         };
     }
@@ -83,7 +93,8 @@ public class Constants {
         return switch (version) {
             case 1 -> "heatingLevel";
             case 2 -> "leaguePosition";
-            default -> "climateControlMode";
+            case 3 -> "climateControlMode";
+            default -> "";
         };
     }
 
@@ -91,7 +102,8 @@ public class Constants {
         return switch (version) {
             case 1 -> "sensors";
             case 2 -> "pucks";
-            default -> "pools";
+            case 3 -> "pools";
+            default -> "";
         };
     }
 
@@ -99,7 +111,8 @@ public class Constants {
         return switch (version) {
             case 1 -> "houses";
             case 2 -> "teams";
-            default -> "zones";
+            case 3 -> "zones";
+            default -> "";
         };
     }
 }
