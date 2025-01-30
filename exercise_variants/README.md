@@ -71,7 +71,14 @@ The initial structure of the **Constants** file should look like this:
 
 ``` java
 public class Constants {
-    public static int variant = 1;
+   public enum Variant{
+        VARIANT_1,
+        VARIANT_2,
+        VARIANT_3
+    }
+    
+   public static Variant variant = Variant.VARIANT_1;
+
 }
 ```
 
@@ -88,7 +95,8 @@ Let's take creating an object as an example using the `ReflectionUtils` test cla
 
 ```java
 private final Class<?> tropicalZoneClass = ReflectionTestUtils.getClazz("de.tum.cit.aet.TropicalZone");
-private final Constructor<?> tropicalZoneConstructor = ReflectionTestUtils.getConstructor(tropicalZoneClass);
+private final Constructor<?> tropicalZoneConstructor = ReflectionTestUtils.getConstructor(tropicalZoneClass, String.class,
+        List.class);
 private final Object tropicalZoneObject = ReflectionTestUtils.newInstance(tropicalZoneConstructor, INITIAL_LEVEL, new ArrayList<>());
 ```
 
@@ -97,8 +105,9 @@ This code snippet suffers from a maintainability issue. If there are many object
 The **Constants** file comes to the rescue in this scenario. By leveraging the `variant` variable, we can eliminate the need for manual string replacements across repositories. Here's the refactored code:
 
 ```java
-private final Class<?> environmentClass = ReflectionTestUtils.getClazz(Constants.environmentClassPath(Constants.variant));
-private final Constructor<?> environmentConstructor = ReflectionTestUtils.getConstructor(environmentClass);
+private final Class<?> environmentClass = ReflectionTestUtils.getClazz(Constants.environmentClassPath());
+private final Constructor<?> environmentConstructor = ReflectionTestUtils.getConstructor(environmentClass, String.class,
+        List.class);
 private final Object environmentObject = ReflectionTestUtils.newInstance(environmentConstructor, INITIAL_LEVEL, new ArrayList<>());
 ```
 
@@ -107,12 +116,11 @@ private final Object environmentObject = ReflectionTestUtils.newInstance(environ
 The **Constants** file is extended to include the `environmentClassPath` method, which maps the `variant` value to the corresponding class path:
 
 ```java
-public static String environmentClassPath(int version) {
-        return switch (version) {
-            case 1 -> "de.tum.cit.aet.House";
-            case 2 -> "de.tum.cit.aet.IceHockeyTeam";
-            case 3 -> "de.tum.cit.aet.TropicalZone";
-            default -> ""; 
+public static String environmentClassPath() {
+        return switch () {
+            case VARIANT_1 -> "de.tum.cit.aet.House";
+            case VARIANT_2 -> "de.tum.cit.aet.IceHockeyTeam";
+            case VARIANT_3 -> "de.tum.cit.aet.TropicalZone";
         };
     }
 ```
@@ -136,12 +144,12 @@ void calculateAvgTropicalZonePoolQualityWithZeroPoolsTest(){
 * **Schema-Agnostic:** 
 
 ```java
-private final Method calculateAverageMethod = getMethod(environmentObject, Constants.environmentClassAverageMethod(Constants.variant));
+private final Method calculateAverageMethod = getMethod(environmentObject, Constants.environmentClassAverageMethod());
 
 @PublicTest
 void calculateAvgEnvironmentWithZeroComponentsTest(){
     if((double) ReflectionTestUtils.invokeMethod(environmentObject, calculateAverageMethod) != 0.0){
-        fail("You did not handle the case correctly when there are zero of " + Constants.componentObject(Constants.variant)+ ".");
+        fail("You did not handle the case correctly when there are zero of " + Constants.componentObject()+ ".");
     }
 }
 ```
