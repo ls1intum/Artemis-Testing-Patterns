@@ -2,16 +2,20 @@
 
 ## **Purpose of This Directory**
 
-This directory contains test cases designed to analyze Java class bytecode using the ASM library. The primary objective is to ensure that specific programming constructs are used (or avoided) in the implementation of the project. The tests focus on detecting the usage of Java **Streams API methods (**``**, **``**)** and **Iterable's **``** method** while enforcing constraints such as prohibiting the usage of explicit loops (`for`, `while`).
+This directory contains test cases created to analyze Java class bytecode using the ASM library. The idea is to make sure that specific programming constructs are used/or avoided in the implementation of the project. 
+
+The tests focus on detecting the usage of Java **Streams API methods (**``*forEach*, *peek*``**)** and **`Iterable`**. 
+
+*For practicality, the test class is taken from an actual Java exercise offered to students, hence the specific names.*
 
 ## **Purpose of the **ASMTest** File**
 
 The `ASMTest` file contains unit tests that:
 
-- Validate the correct implementation of methods related to **baggage control and flight management**.
-- Ensure compliance with coding constraints, such as avoiding `forEach`, `peek`, and explicit loops.
+- Validate the correct implementation of methods related to **baggage control and flight management**. 
+- Ensure compliance with certain constraints, such as avoiding `forEach`, `peek`, and explicit loops.
 - Utilize **reflection** and **bytecode inspection** to enforce constraints at a deeper level than regular Java analysis tools.
-
+- 
 ## **How ASM is Used in This File**
 
 ### **What is ASM?**
@@ -68,5 +72,5 @@ ASM is a Java bytecode manipulation and analysis framework. It allows reading, m
 
 ## **Conclusion**
 
-This test setup ensures that Java Streams API is used correctly while enforcing coding constraints. By leveraging **ASM for bytecode analysis** and **AST assertions**, the `ASMTest` file provides a rigorous mechanism to enforce Java best practices and project-specific rules.
+This test setup ensures that Java Streams API is used correctly while enforcing coding constraints. By using **ASM for bytecode analysis** and **AST assertions**, the `ASMTest` file provides a mechanism to deny the usage of `Stream::forEach`, `Stream::peek` and `Iterable`.
 
