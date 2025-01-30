@@ -19,13 +19,13 @@ import static de.tum.cit.aet.Utils.*;
 @M01E02
 class EnvironmentBehaviorTest {
     static final double EPSILON = 0.00001;
-    static final String INITIAL_LEVEL = Constants.initialControlMode(Constants.variant);
+    static final String INITIAL_LEVEL = Constants.initialControlMode();
 
     private final Object environmentObject = ReflectionTestUtils.newInstance(environmentConstructor, INITIAL_LEVEL, new ArrayList<>());
 
-    private final Method changeControlMode = getMethod(environmentObject, Constants.environmentChangeControlMode(Constants.variant), String.class);
+    private final Method changeControlMode = getMethod(environmentObject, Constants.environmentChangeControlMode(), String.class);
 
-    private final Method computeAverageCondition = getMethod(environmentObject, Constants.environmentComputeAverageCondition(Constants.variant));
+    private final Method computeAverageCondition = getMethod(environmentObject, Constants.environmentComputeAverageCondition());
 
     private int firstInitialLevel = -1;
 
@@ -62,22 +62,22 @@ class EnvironmentBehaviorTest {
         }
 
 
-        Object environmentObject = ReflectionTestUtils.newInstance(environmentConstructor,  Constants.intToLevel(Constants.variant, initialLevel), new ArrayList<>());
-        var result = AttributeHelper.getAttribute(environmentClass, Constants.environmentAttributeName(Constants.variant), environmentObject, String.class);
+        Object environmentObject = ReflectionTestUtils.newInstance(environmentConstructor,  Constants.intToLevel(initialLevel), new ArrayList<>());
+        var result = AttributeHelper.getAttribute(environmentClass, Constants.environmentAttributeName(), environmentObject, String.class);
 
-        if(!result.equals(Constants.intToLevel(Constants.variant, initialLevel))){
-            fail("The constructor does not set the initial " + Constants.environmentAttributeName(Constants.variant) + " correctly");
+        if(!result.equals(Constants.intToLevel(initialLevel))){
+            fail("The constructor does not set the initial " + Constants.environmentAttributeName() + " correctly");
         }
 
         try{
-            ReflectionTestUtils.invokeMethod(environmentObject, changeControlMode, Constants.intToLevel(Constants.variant, changeLevelTo));
+            ReflectionTestUtils.invokeMethod(environmentObject, changeControlMode, Constants.intToLevel(changeLevelTo));
         } catch (Exception e){
-            fail(Constants.environmentChangeControlMode(Constants.variant) + " throws an exception when it should not have.");
+            fail(Constants.environmentChangeControlMode() + " throws an exception when it should not have.");
         }
-        result = AttributeHelper.getAttribute(environmentClass, Constants.environmentAttributeName(Constants.variant), environmentObject, String.class);
+        result = AttributeHelper.getAttribute(environmentClass, Constants.environmentAttributeName(), environmentObject, String.class);
 
-        if(!result.equals(Constants.intToLevel(Constants.variant, changeLevelTo))){
-            fail("The method " + Constants.environmentChangeControlMode(Constants.variant) + " does not set the correct " + Constants.environmentAttributeName(Constants.variant));
+        if(!result.equals(Constants.intToLevel(changeLevelTo))){
+            fail("The method " + Constants.environmentChangeControlMode() + " does not set the correct " + Constants.environmentAttributeName());
         }
     }
 
@@ -105,22 +105,22 @@ class EnvironmentBehaviorTest {
             } while(initialLevel == changeLevelTo);
         }
 
-        Object environmentObject = ReflectionTestUtils.newInstance(environmentConstructor,  Constants.intToLevel(Constants.variant, initialLevel), new ArrayList<>());
-        var result = AttributeHelper.getAttribute(environmentClass, Constants.environmentAttributeName(Constants.variant), environmentObject, String.class);
+        Object environmentObject = ReflectionTestUtils.newInstance(environmentConstructor,  Constants.intToLevel(initialLevel), new ArrayList<>());
+        var result = AttributeHelper.getAttribute(environmentClass, Constants.environmentAttributeName(), environmentObject, String.class);
 
-        if(!result.equals(Constants.intToLevel(Constants.variant, initialLevel))){
-            fail("The constructor does not set the initial " + Constants.environmentAttributeName(Constants.variant) + " correctly");
+        if(!result.equals(Constants.intToLevel(initialLevel))){
+            fail("The constructor does not set the initial " + Constants.environmentAttributeName() + " correctly");
         }
 
         try{
-            ReflectionTestUtils.invokeMethod(environmentObject, changeControlMode, Constants.intToLevel(Constants.variant, changeLevelTo));
+            ReflectionTestUtils.invokeMethod(environmentObject, changeControlMode, Constants.intToLevel(changeLevelTo));
         } catch (Exception e){
-            fail(Constants.environmentChangeControlMode(Constants.variant) + " throws an exception when it should not have.");
+            fail(Constants.environmentChangeControlMode() + " throws an exception when it should not have.");
         }
-        result = AttributeHelper.getAttribute(environmentClass, Constants.environmentAttributeName(Constants.variant), environmentObject, String.class);
+        result = AttributeHelper.getAttribute(environmentClass, Constants.environmentAttributeName(), environmentObject, String.class);
 
-        if(!result.equals(Constants.intToLevel(Constants.variant, changeLevelTo))){
-            fail("The method " + Constants.environmentChangeControlMode(Constants.variant) + " does not set the correct " + Constants.environmentAttributeName(Constants.variant));
+        if(!result.equals(Constants.intToLevel(changeLevelTo))){
+            fail("The method " + Constants.environmentChangeControlMode() + " does not set the correct " + Constants.environmentAttributeName());
         }
     }
 
@@ -143,7 +143,7 @@ class EnvironmentBehaviorTest {
             fail("Expected an IllegalArgumentException to be thrown");
         } catch (Exception e) {
             if (!e.getCause().getClass().equals(IllegalArgumentException.class)) {
-                fail("You forgot to check whether the " + Constants.environmentAttributeName(Constants.variant)+ " of the argument is null.");
+                fail("You forgot to check whether the " + Constants.environmentAttributeName()+ " of the argument is null.");
             }
         }
     }
@@ -151,7 +151,7 @@ class EnvironmentBehaviorTest {
     @PublicTest
     void computeAverageConditionWithZeroComponentsTest(){
         if((double) ReflectionTestUtils.invokeMethod(environmentObject, computeAverageCondition) != 0.0){
-            fail("You did not handle the case correctly when there are zero of " + Constants.componentObject(Constants.variant)+ ".");
+            fail("You did not handle the case correctly when there are zero of " + Constants.componentObject()+ ".");
         }
     }
 
@@ -181,7 +181,7 @@ class EnvironmentBehaviorTest {
                 computeAverageCondition);
 
         if(Math.abs((sum / componentObjectList.size()) - resultFromStudent) > EPSILON){
-            fail("The " + Constants.environmentComputeAverageCondition(Constants.variant)+ " is not implemented correctly or the values are not equal within " +
+            fail("The " + Constants.environmentComputeAverageCondition()+ " is not implemented correctly or the values are not equal within " +
                     "the specified range");
         }
     }
@@ -212,7 +212,7 @@ class EnvironmentBehaviorTest {
                 computeAverageCondition);
 
         if(Math.abs((sum / componentList.size()) - resultFromStudent) > EPSILON){
-            fail("The " + Constants.environmentComputeAverageCondition(Constants.variant)+ " is not implemented correctly or the values are not equal within " +
+            fail("The " + Constants.environmentComputeAverageCondition()+ " is not implemented correctly or the values are not equal within " +
                     "the specified range");
         }
     }

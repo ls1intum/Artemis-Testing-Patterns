@@ -19,13 +19,13 @@ public class EnvironmentAggregationBehaviorTest {
     private final Object environmentAggregationObject = ReflectionTestUtils.newInstance(environmentAggregationConstructor,
             new HashSet<>());
 
-    private final Method calculateMaxAvgMethod = getMethod(environmentAggregationObject, Constants.environmentAggregationComputeMaxAverage(Constants.variant));
+    private final Method calculateMaxAvgMethod = getMethod(environmentAggregationObject, Constants.environmentAggregationComputeMaxAverage());
 
     @PublicTest
     void calculateMaxAvgEnvironmentAggregationWithZeroComponents(){
         System.out.println(ReflectionTestUtils.invokeMethod(environmentAggregationObject, calculateMaxAvgMethod));
         assertEquals(ReflectionTestUtils.invokeMethod(environmentAggregationObject, calculateMaxAvgMethod), 0.0,
-              "Case of zero " +  Constants.environmentObject(Constants.variant)+ " not handled correctly");
+                "Case of zero " +  Constants.environmentObject() + " not handled correctly");
     }
 
     @PublicTest
@@ -34,7 +34,7 @@ public class EnvironmentAggregationBehaviorTest {
         var res = Math.abs(tuple.second - (double) ReflectionTestUtils.invokeMethod(tuple.first, calculateMaxAvgMethod));
 
         if(res > EPSILON){
-            fail("The " + Constants.environmentAggregationComputeMaxAverage(Constants.variant) + " method is not implemented correctly or the values are not equal"
+            fail("The " + Constants.environmentAggregationComputeMaxAverage() + " method is not implemented correctly or the values are not equal"
                     + " within the specified epsilon" );
         }
     }
@@ -51,7 +51,7 @@ public class EnvironmentAggregationBehaviorTest {
         )));
 
         if( (double) ReflectionTestUtils.invokeMethod(environmentAggregation, calculateMaxAvgMethod) != 0){
-            fail("The " + Constants.environmentAggregationComputeMaxAverage(Constants.variant) + " method is not implemented correctly when the max is 0");
+            fail("The " + Constants.environmentAggregationComputeMaxAverage() + " method is not implemented correctly when the max is 0");
         }
     }
 }

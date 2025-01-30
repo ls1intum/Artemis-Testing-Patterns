@@ -2,117 +2,110 @@ package de.tum.cit.aet;
 
 public class Constants {
 
-    public static int variant = 3;
-    public static String initialControlMode(int version){
-        return switch (version) {
-            case 1 -> "off";
-            case 2 -> "top";
-            case 3 -> "neutral";
-            default -> "";
+    public enum Variant{
+        ZOO,
+        ICE,
+        TROPICAL
+    }
+
+    public static Variant variant = Variant.ZOO;
+    public static String initialControlMode(){
+        return switch (variant) {
+            case ZOO -> "off";
+            case ICE -> "top";
+            case TROPICAL -> "neutral";
         };
     }
 
-    public static String environmentAggregationClassPath(int version) {
-        return switch (version) {
-            case 1 -> "de.tum.cit.aet.Zoo";
-            case 2 -> "de.tum.cit.aet.IceHockeyLeague";
-            case 3 -> "de.tum.cit.aet.TropicalParadise";
-            default -> "";
+    public static String environmentAggregationClassPath() {
+        return switch (variant) {
+            case ZOO -> "de.tum.cit.aet.Zoo";
+            case ICE -> "de.tum.cit.aet.IceHockeyLeague";
+            case TROPICAL -> "de.tum.cit.aet.TropicalParadise";
         };
     }
 
-    public static String environmentClassPath(int version) {
-        return switch (version) {
-            case 1 -> "de.tum.cit.aet.House";
-            case 2 -> "de.tum.cit.aet.IceHockeyTeam";
-            case 3 -> "de.tum.cit.aet.TropicalZone";
-            default -> "";
+    public static String environmentClassPath() {
+        return switch (variant) {
+            case ZOO -> "de.tum.cit.aet.House";
+            case ICE -> "de.tum.cit.aet.IceHockeyTeam";
+            case TROPICAL -> "de.tum.cit.aet.TropicalZone";
         };
     }
 
-    public static String componentClassPath(int version) {
-        return switch (version) {
-            case 1 -> "de.tum.cit.aet.Sensor";
-            case 2 -> "de.tum.cit.aet.Puck";
-            case 3 -> "de.tum.cit.aet.Pool";
-            default -> ""
+    public static String componentClassPath() {
+        return switch (variant) {
+            case ZOO -> "de.tum.cit.aet.Sensor";
+            case ICE -> "de.tum.cit.aet.Puck";
+            case TROPICAL -> "de.tum.cit.aet.Pool";
         };
     }
 
-    public static String environmentChangeControlMode(int version) {
-        return switch (version) {
-            case 1 -> "changeHeatingLevel";
-            case 2 -> "changeLeaguePosition";
-            case 3 -> "changeClimateControlMode";
-            default -> "";
+    public static String environmentChangeControlMode() {
+        return switch (variant) {
+            case ZOO -> "changeHeatingLevel";
+            case ICE -> "changeLeaguePosition";
+            case TROPICAL -> "changeClimateControlMode";
         };
     }
 
-    public static String environmentComputeAverageCondition(int version) {
-        return switch (version) {
-            case 1 -> "calculateAvgHouseTemperature";
-            case 2 -> "computeAvgPuckGoalDifferential";
-            case 3 -> "computeAvgPoolWaterQuality";
-            default -> "";
+    public static String environmentComputeAverageCondition() {
+        return switch (variant) {
+            case ZOO -> "calculateAvgHouseTemperature";
+            case ICE -> "computeAvgPuckGoalDifferential";
+            case TROPICAL -> "computeAvgPoolWaterQuality";
         };
     }
 
-    public static String environmentAggregationComputeMaxAverage(int version) {
-        return switch (version) {
-            case 1 -> "calculateMaxAvgHouseTemperature";
-            case 2 -> "calculateMaxAvgTeamGoalDifferential";
-            case 3 -> "calculateMaxAvgPoolWaterQuality";
-            default -> "";
+    public static String environmentAggregationComputeMaxAverage() {
+        return switch (variant) {
+            case ZOO -> "calculateMaxAvgHouseTemperature";
+            case ICE -> "calculateMaxAvgTeamGoalDifferential";
+            case TROPICAL -> "calculateMaxAvgPoolWaterQuality";
         };
     }
 
-    public static String intToLevel(int version, int level) {
-        return switch (version) {
-            case 1 -> switch (level) {
+    public static String intToLevel(int level) {
+        return switch (variant) {
+            case ZOO -> switch (level) {
                 case 1 -> "low";
                 case 2 -> "high";
-                case 3 -> "off";
-                default -> "";
+                default -> "off";
             };
-            case 2 -> switch (level){
+            case ICE -> switch (level){
                 case 1 -> "top";
                 case 2 -> "middle";
-                case 3 -> "bottom";
-                default -> "";
+                default -> "bottom";
             };
-            default -> switch (level){
+            case TROPICAL -> switch (level){
                 case 1 -> "humid";
                 case 2 -> "dry";
-                case 3 -> "neutral";
-                default -> "";
-            }; // Return an empty string for any other version
+                default -> "neutral";
+            };
         };
     }
 
-    public static String environmentAttributeName(int version) {
-        return switch (version) {
-            case 1 -> "heatingLevel";
-            case 2 -> "leaguePosition";
-            case 3 -> "climateControlMode";
-            default -> "";
+    public static String environmentAttributeName() {
+        return switch (variant) {
+            case ZOO -> "heatingLevel";
+            case ICE -> "leaguePosition";
+            case TROPICAL -> "climateControlMode";
         };
     }
 
-    public static String componentObject(int version) {
-        return switch (version) {
-            case 1 -> "sensors";
-            case 2 -> "pucks";
-            case 3 -> "pools";
-            default -> "";
+    public static String componentObject() {
+        return switch (variant) {
+            case ZOO -> "sensors";
+            case ICE -> "pucks";
+            case TROPICAL -> "pools";
         };
     }
 
-    public static String environmentObject(int version) {
-        return switch (version) {
-            case 1 -> "houses";
-            case 2 -> "teams";
-            case 3 -> "zones";
-            default -> "";
+    public static String environmentObject() {
+        return switch (variant) {
+            case ZOO -> "houses";
+            case ICE -> "teams";
+            case TROPICAL -> "zones";
         };
     }
 }
