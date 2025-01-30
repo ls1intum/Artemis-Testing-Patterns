@@ -11,12 +11,12 @@ import java.util.Set;
 import static de.tum.cit.aet.EnvironmentBehaviorTest.INITIAL_LEVEL;
 
 public class Utils {
-    static Class<?> environmentClass = ReflectionTestUtils.getClazz(Constants.environmentClassPath(Constants.variant));
-    static Class<?> environmentAggregationClass = ReflectionTestUtils.getClazz(Constants.environmentAggregationClassPath(Constants.variant));
+    static Class<?> environmentClass = ReflectionTestUtils.getClazz(Constants.environmentClassPath());
+    static Class<?> environmentAggregationClass = ReflectionTestUtils.getClazz(Constants.environmentAggregationClassPath());
     static Constructor<?> environmentConstructor = ReflectionTestUtils.getConstructor(environmentClass, String.class,
             List.class);
     static Constructor<?> environmentAggregationConstructor = ReflectionTestUtils.getConstructor(environmentAggregationClass, Set.class);
-    static Class<?> componentClass = ReflectionTestUtils.getClazz(Constants.componentClassPath(Constants.variant));
+    static Class<?> componentClass = ReflectionTestUtils.getClazz(Constants.componentClassPath());
     static Constructor<?> componentConstructor = ReflectionTestUtils.getConstructor(componentClass, double.class);
     public static Tuple<Object, Double> createEnvironmentObjectsWithMax(){
         int numEnvironments = 2;

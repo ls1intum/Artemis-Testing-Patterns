@@ -8,7 +8,7 @@ public class Constants {
         TROPICAL
     }
 
-    public static Variant variant = Variant.ZOO;
+    public static Variant variant = Variant.TROPICAL;
     public static String initialControlMode(){
         return switch (variant) {
             case ZOO -> "off";
